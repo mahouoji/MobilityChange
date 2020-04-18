@@ -49,5 +49,5 @@ We will use Python numpy and pandas for data processing, matplotlib and seaborn 
 
 3. Mobility Changes in Response to COVID-19 ([link]( https://arxiv.org/pdf/2003.14228.pdf)).
 
-4. Pass-Join: A Partition-based Method for Similarity Joins
+4. Pass-Join: A Partition-based Method for Similarity Joins ([link](http://vldb.org/pvldb/vol5/p253_guoliangli_vldb2012.pdf))
 
