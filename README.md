@@ -10,6 +10,8 @@ Bangwen Sun (bs3845)
 
 Hang Dong (hd1191)
 
+Yunxiao Shi (ys3404)
+
 ## Project Description
 
 In respond to the pandemic, mobility in cities changed drastically under administrative restriction and voluntary behavior change. Resent studies [1, 3] quantified state-level or country-level mobility change using mobility statistics. Within New York City, traffic volume and public transportation usage has dropped, while different neighborhoods may respond differently [2].
@@ -51,3 +53,4 @@ We will use Python numpy and pandas for data processing, matplotlib and seaborn 
 
 4. Pass-Join: A Partition-based Method for Similarity Joins ([link](http://vldb.org/pvldb/vol5/p253_guoliangli_vldb2012.pdf))
 
+5. Google COVID-19 Community Mobility Reports: Anonymization Process Description (version 1.0) ([link](https://arxiv.org/pdf/2004.04145.pdf))
