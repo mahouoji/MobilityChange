@@ -30,9 +30,7 @@ We use MTA Turnstile Usage Data because it is updated frequently and has a granu
 
 To demonstrate the mobility changes in different urban area, we will integrate ridership data and MTA Station Location data. Because the documentary format of station names may differ in these data sets, we will figure out the similarity of names using edit distance. We will visualize ridership and the percentage of ridership change using dot map for each staton and choropleth map for aggregated regions. The latter allows us to compare our result with other data sources in different spacial granularity, for example confirmed cases by zip code or by borough. We will do spacial aggregation on stations and implement quad tree index.
 
-We will use Python numpy and pandas for data processing, matplotlib and seaborn for visualization. (?)
-
-...
+We will use Python and Jupyter Notebook in this project. We will use packages  such as NumPy, pandas, GeoPandas, for data processing, Matplotlib, and seaborn.
 
 ## List of Dataset
 
@@ -40,7 +38,8 @@ We will use Python numpy and pandas for data processing, matplotlib and seaborn 
 | ------------------------------------------------------------ | ------------------------------------------------------------ |
 | [MTA Turnstile Usage Data](http://web.mta.info/developers/turnstile.html) | Weekly released cumulative entrance and exit count of each turnstile for each record datetime, also contains station name and line names. For each week, there is a CSV formatted text file, with header: <br />**C/A,UNIT,SCP,STATION,LINENAME,DIVISION,DATE,TIME,DESC,ENTRIES,EXITS**<br />C/A – The Control Area is the operator booth in a station. Some stations only have one operator booth. However, larger stations may have more than one.<br />UNIT – The Remote Unit, which is the collection of turnstiles. A station may have more than one Remote Unit.<br />SCP – The Subunit Channel Position represents the turnstile and the number used may repeat across stations. The **UNIT and SCP together is a unique identifier of a turnstile**.<br />STATION - Name of station, e.g. "59 ST"<br />LINENAME - Lines, e.g. "NQR456W"<br />DATE – The Date is the date of the recording with the format MM/DD/YYYY.<br />TIME – The Time is the time for a recording, with the format: HH:MM:SS.<br />DESC – The DESC is the type of event of the reading. **The turnstiles submit “Regular” readings every four hours.** They stagger the exact time of the readings across all the turnstiles and stations. Staggering the data submission times avoids having all the turnstiles update at simultaneously. “Recover Audit” designates scheduled readings taken after a communication outage. Other values such as “DoorClose” and “DoorOpen” represent unscheduled maintenance readings.<br />ENTRIES - The ENTRIES are a cumulative count of turnstile entrances. Note, the ENTRIES do not reset each day or for each recording period. **The turnstile entry count continues to increase until it reaches the device limit and then resets to zero.**<br />EXITS - The EXITS are a cumulative count of the turnstile exits. |
 | [MTA Station Locations](http://web.mta.info/developers/data/nyct/subway/Stations.csv) | Latitude and longitude of subway stations, also contains stop name, line names, direction labels etc. |
-| [NYTimes Confirmed Cases](https://github.com/nytimes/covid-19-data) |                                                              |
+| [Station Locations](https://github.com/chriswhong/nycturnstiles/blob/master/geocoded.csv) | Unofficial latitude and longitude of subway stations, updated on 4/23/2013.<br />Header: remote unit, control area, station, lines, division, latitude, longitude |
+| [NYC COVID-19 Data](https://github.com/nychealth/coronavirus-data) | NYC coronavirus dataassembled by the NYC Department of Health and Mental Hygiene. <br />boro.csv - rates of confirmed cases by NYC borough of residence.<br />tests-by-zcta.csv - cumulative test and test positive count of NYC residents by ZIP code |
 |                                                              |                                                              |
 
 ## Reference
