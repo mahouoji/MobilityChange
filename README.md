@@ -26,7 +26,7 @@ In this project we will use MTA turnstile data, along with other datasets, to an
 
 We use MTA Turnstile Usage Data because it is updated frequently and has a granularity suitable for our analysis of daily mobility changes in small areas. We will first clean and process raw turnstile data into subway ridership by station per day. We may select those stations with higher number of traffic and compare the number after the outbreak with that in previous months or in previous years.  We can visualize ridership over time using line chart and see if the trend correspond to important dates.
 
-To demonstrate the mobility changes in different urban area, we will integrate ridership data and MTA Station Location data. We will visualize ridership and the percentage of ridership change using dot map for each staton and choropleth map for aggregated regions. The latter allows us to compare our result with other data sources in different spacial granularity, for example confirmed cases by zip code or by borough. We will do spacial aggregation on stations and implement grid index.
+To demonstrate the mobility changes in different urban area, we will integrate ridership data and MTA Station Location data. Because the documentary format of station names may differ in these data sets, we will figure out the similarity of names using edit distance. We will visualize ridership and the percentage of ridership change using dot map for each staton and choropleth map for aggregated regions. The latter allows us to compare our result with other data sources in different spacial granularity, for example confirmed cases by zip code or by borough. We will do spacial aggregation on stations and implement quad tree index.
 
 We will use Python numpy and pandas for data processing, matplotlib and seaborn for visualization. (?)
 
@@ -48,4 +48,6 @@ We will use Python numpy and pandas for data processing, matplotlib and seaborn 
 2. They Can’t Afford to Quarantine. So They Brave the Subway. ([link](https://www.nytimes.com/2020/03/30/nyregion/coronavirus-mta-subway-riders.html))
 
 3. Mobility Changes in Response to COVID-19 ([link]( https://arxiv.org/pdf/2003.14228.pdf)).
+
+4. Pass-Join: A Partition-based Method for Similarity Joins
 
