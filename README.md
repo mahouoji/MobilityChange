@@ -30,9 +30,9 @@ We use MTA Turnstile Usage Data because it is updated frequently and has a granu
 
 To demonstrate the mobility changes in different urban area, we will integrate ridership data and MTA Station Location data. Because the documentary format of station names may differ in these data sets, we will figure out the similarity of names using edit distance. We will visualize ridership and the percentage of ridership change using dot map for each staton and choropleth map for aggregated regions. The latter allows us to compare our result with other figures of different spacial granularity, for example, confirmed cases by zip code or borough. We will do spacial aggregation on stations and implement quad tree index.
 
-Based on the result of the above steps, we might need to delve into more detailed information. For example, grouping subway ridership data by lines or time periods in one day. We may also refer to other datasets, such as MTA Fare Data for different card types, to see if we can have better understanding of the rider population. As complement to subway traffic, we might use data from other transportation systems like citibike and MTA bridge and tunnel usage. Since those data are aggregated and reported by various time span, we will need to aggregate turnstile data by week or month accordingly.
+Based on the result of the above steps, we might need to delve into more detailed information. For example, grouping subway ridership data by lines or time periods in one day. We may also refer to other datasets, such as MTA Fare Data for different card types, to see if we can have better understanding of the rider population. As complement to subway traffic, we might use data from other transportation systems like citibike and MTA bridge and tunnel usage. Since those data are aggregated and uploaded by various time span, we will need to aggregate turnstile data by week or month accordingly.
 
-We will use Python and Jupyter Notebook in this project. We will use packages  such as NumPy, pandas, GeoPandas, for data processing, Matplotlib, and seaborn.
+We will use Python and Jupyter Notebook in this project. We will use packages  such as NumPy, pandas, GeoPandas, Matplotlib, and seaborn.
 
 ## List of Dataset
 
