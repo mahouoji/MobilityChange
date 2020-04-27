@@ -75,7 +75,6 @@ It still requires some processes before the integration of these two data sets b
 Next step will be calculating the similarity of station names using edit distance for these stations which cannot make a pair.
 
 #### MTA Turnstile Usage (turnstile_cleaning.ipynb)
-
 ##### Accumulative counters
 
 The turnstile entry and exit count are accumulative, they continues to increase until reaches the device limit and then resets to zero. Turnstiles submit Regular readings (DESC=REGULAR) every four hours. The exact time of the readings are staggered across turnstiles and stations. We observed that the majority of the turnstile reads on the hour, like 00:00:00 or 01:00:00, but there are still irragular values (like 18:37:00). We could make no assumptions on when the reading happen. When a reset happens, we have no way to find the exact limit. We also found cases where reset happens when the counter's value is pretty low (about 300). We will need to drop the number when reset happens.
