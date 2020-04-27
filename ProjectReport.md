@@ -1,5 +1,9 @@
 # BigData2020 Project
 
+### Project Link
+
+https://github.com/mahouoji/MobilityChange
+
 ## Group Name
 
 subwayNYC
@@ -51,7 +55,7 @@ We will use Python and Jupyter Notebook in this project. We will use packages  s
 
 ## Data Cleaning and Integration
 
-#### Turnstile Data Preprocessing (MTADataIntegration.ipynb)
+### Turnstile Data Preprocessing (MTADataIntegration.ipynb)
 
 Turnstile data contains 11 fields:
 C/A, UNIT, SCP, STATION, LINENAME, DIVISION, DATE, TIME, DESC, ENTRIES, EXITS
@@ -74,7 +78,8 @@ It still requires some processes before the integration of these two data sets b
 
 Next step will be calculating the similarity of station names using edit distance for these stations which cannot make a pair.
 
-#### MTA Turnstile Usage (turnstile_cleaning.ipynb)
+### MTA Turnstile Usage (turnstile_cleaning.ipynb)
+
 ##### Accumulative counters
 
 The turnstile entry and exit count are accumulative, they continues to increase until reaches the device limit and then resets to zero. Turnstiles submit Regular readings (DESC=REGULAR) every four hours. The exact time of the readings are staggered across turnstiles and stations. We observed that the majority of the turnstile reads on the hour, like 00:00:00 or 01:00:00, but there are still irragular values (like 18:37:00). We could make no assumptions on when the reading happen. When a reset happens, we have no way to find the exact limit. We also found cases where reset happens when the counter's value is pretty low (about 300). We will need to drop the number when reset happens.
@@ -83,7 +88,8 @@ We compute the daily entries and exits by first computing the change of counter 
 
 There are multiple causes of unreasonable difference value. We found that a few turnstiles counts backward. Their entry and exit count always decrease instead of increase. To find out those turnstiles, we calculate the ratio of negative differences among all the record of each turnstile. Resets are usually rare in on turnstile. If a turnstile have more than 90% of differences negative, we say it is a negative counter and flip its value to positive. In other cases, negative values are set to 0. We also observed very large values. We set limit on the maximum value of difference (20000) and remove those values.
 
-#### MTA Turnstile Location (turnstile_location_integration.ipynb)
+### MTA Turnstile Location (turnstile_location_integration.ipynb)
+
 ##### Position Dataset
 Unfortunately, station names in Turnstile Usage Data and that in the Station Position Data on by MTA website seems to have different format, and there seems to be no other foreign key for joining these two datasets. We used a geolocation dataset from a GitHub repository (https://github.com/chriswhong/nycturnstiles/blob/master/geocoded.csv), which contains remote unit, control area, station, lines, division, latitude, and longitude. We join stations and this location data by control area and remote unit.
 
@@ -93,7 +99,7 @@ In other cases, the station was not included at all, we manually searched the MT
 
 We plotted the stations we found on map to verify the coordinates.
 
-#### CitiBike Trip History (citibykes.ipynb)
+### CitiBike Trip History (citibykes.ipynb)
 
 CitiBike Trip History Data is uploaded each month as a CSV file, data for March 2020 is currently available. Each line of data contains starttime, stop time, start station, end station, and the coordinates of the stations. We are curious about the total number of trips per day and the number of daily trips in terms of departure and arrival stations.
 
@@ -109,7 +115,7 @@ Station locations are joined with trip records. We selected those columns (stati
 
 We plotted the stations on map. We also calculated trips by departure and arrival stations, and show some of the results in the map. One problem with the CitiBike data is that the stations are condensed with in Manhattan and downtowns of Brooklyn and Queens. The subway data may have similar problem, we will need to keep that in mind while doing analysis.
 
-#### MTA Bridges and Tunnels Data Preprocessing
+### MTA Bridges and Tunnels Data Preprocessing (MTA_Bridge_and_Tunnel.ipynb)
 
 ##### Description
 
