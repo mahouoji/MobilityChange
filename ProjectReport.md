@@ -67,25 +67,28 @@ In this part of data cleaning and aggregation, we inspected the Bridges and Tunn
 
 + Cleaning Pipelines
 
-The hourly Bridges and Tunnels dataset consists of 6 attributes (columns), namely
-	+ ```Plaza ID''': a numbercoded ID representing each toll plaza
-	+ ```Date''': The date associated with the line data 
-	+ ```Hour''': The hour (0-23) associated with the line data (0 = between 12am and 1am)
-	+ ```Direction''': Direction of Traffic: I = Inbound (IB); O = Outbound (OB)
-	+ ```# Vehicles - ETC (E-ZPass)''': The number of vehicles that pass through each bridge or tunnel’s toll plaza using E-ZPass during each hour
-	+ ```# Vehicles - Cash/VToll''': The number of vehicles that paid their tolls in cash during that hour
-with roughly 1.59 million rows (entries) dating all the back to 2010. To make the data more relavant to our cause we only take into account data starting from Jan. 1, 2020, since the first confirmed COVID-19 case in the U.S. was in early 2020, which results in ```44,4445''' data entries. For data cleaning our goal is to identify if there are any
+The hourly Bridges and Tunnels dataset consists of 6 attributes (columns), namely    
+  
+	- ```Plaza ID```: a numbercoded ID representing each toll plaza
+	- ```Date```: The date associated with the line data 
+	- ```Hour```: The hour (0-23) associated with the line data (0 = between 12am and 1am)
+	- ```Direction```: Direction of Traffic: I = Inbound (IB); O = Outbound (OB)
+	- ```# Vehicles - ETC (E-ZPass)```: The number of vehicles that pass through each bridge or tunnel’s toll plaza using E-ZPass during each hour
+	- ```# Vehicles - Cash/VToll```: The number of vehicles that paid their tolls in cash during that hour
+with roughly 1.59 million rows (entries) dating all the back to 2010. To make the data more relavant to our cause we only take into account data starting from Jan. 1, 2020, since the first confirmed COVID-19 case in the U.S. was in early 2020, which results in ```44,4445``` data entries. For data cleaning our goal is to identify if there are any    
+
 	1. null/invalid values in each row of the six attributes and 
 	2. duplicate values between rows
 and surprsingly enough, by inspection the hourly traffic is well curated and none of the above problems exists, which saves us a lot of headache. Now that we know we do not need to worry about data error, we can safely move on to data aggregation to compute statistics of interest to give us an idea of how COVID-19 has impacted the traffic flow through the bridges and tunnels.
 
 + Data Aggregation
 
-Here natually three questions arise that are of interest, 
+Here natually three questions arise that are of interest,     
+
 	1. How has the ETC or Cash/Toll changed from January to April because of COVID-19?
 	2. Did traffic patterns in each hours change per month because of COVID-19?
 	3. How has COVID-19 impacted traffic flow in different geographic regions (i.e. plazas)?
-Refer to ```./data_cleaning/MTA_Bridges_and_Tunnel.ipynb''' for detailed quantitative analysis and visualization.
+Refer to ```./data_cleaning/MTA_Bridges_and_Tunnel.ipynb``` for detailed quantitative analysis and visualization.
 
 + Access of Data
 
