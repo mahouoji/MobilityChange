@@ -38,8 +38,6 @@ We will use Python and Jupyter Notebook in this project. We will use packages  s
 
 ### Turnstile Data Preprocessing
 
-## List of Dataset
-
 Turnstile data contains 11 fields: 
 C/A, UNIT, SCP, STATION, LINENAME, DIVISION, DATE, TIME, DESC, ENTRIES, EXITS
 
@@ -62,6 +60,7 @@ It still requires some processes before the integration of these two data sets b
 
 Next step will be calculating the similarity of station names using edit distance for these stations which cannot make a pair.
 
+## List of Dataset
 
 | Dataset                                                      | Description                                                  |
 | ------------------------------------------------------------ | ------------------------------------------------------------ |
