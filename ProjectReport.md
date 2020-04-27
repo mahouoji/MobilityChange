@@ -74,6 +74,43 @@ Next step will be calculating the similarity of station names using edit distanc
 | [NYC COVID-19 Data](https://github.com/nychealth/coronavirus-data) | NYC coronavirus dataassembled by the NYC Department of Health and Mental Hygiene. <br />boro.csv - rates of confirmed cases by NYC borough of residence.<br />tests-by-zcta.csv - cumulative test and test positive count of NYC residents by ZIP code |
 |                                                              |                                                              |
 
+## Data Cleaning and Integration
+
+#### CitiBike Trip History (citibykes.ipynb)
+
+CitiBike Trip History Data is uploaded each month as a CSV file, data for March 2020 is currently available. Each line of data contains starttime, stop time, start station, end station, and the coordinates of the stations. We are curious about the total number of trips per day and the number of daily trips in terms of departure and arrival stations.
+##### Daily tirps
+
+We used data in February and March. The data was pretty clean. Each trip can be identified by the starttime and a bikeid. We found several trips where starttime and stoptime are in different days, some trips might take many days. But there is not evidence that they are wrong as far as we care. We simply use starttime for aggregation.
+
+We plotted the trend of daily trips over the two month. Although the number seems to jitter a lot, probably influenced by weather, there is a clear plunge in late March.
+
+##### Station location and daily trips
+
+Station locations are joined with trip records. We selected those columns (station id, station name, latitude, longitude) and stacked them in one table. We found duplications due to different precisions of latitude and longitude. We kept only the more precise ones by selecting those having larger absolute difference form the rounded value of their own.
+
+We plotted the stations on map. We also calculated trips by departure and arrival stations, and show some of the results in the map. One problem with the CitiBike data is that the stations are condensed with in Manhattan and downtowns of Brooklyn and Queens. The subway data may have similar problem, we will need to keep that in mind while doing analysis.
+
+#### MTA Turnstile Usage (turnstile_cleaning.ipynb)
+
+##### Accumulative counters
+
+The turnstile entry and exit count are accumulative, they continues to increase until reaches the device limit and then resets to zero. Turnstiles submit Regular readings (DESC=REGULAR) every four hours. The exact time of the readings are staggered across turnstiles and stations. We observed that the majority of the turnstile reads on the hour, like 00:00:00 or 01:00:00, but there are still irragular values (like 18:37:00). We could make no assumptions on when the reading happen. When a reset happens, we have no way to find the exact limit. We also found cases where reset happens when the counter's value is pretty low (about 300). We will need to drop the number when reset happens.
+
+We compute the daily entries and exits by first computing the change of counter between each adjacent reading. The change (or difference) is calculated by subtracting the value of this time slot from the value next time slot. We fix unreasonable values for each time slots. After that we group data by turnstile and date and sum the differences.
+
+There are multiple causes of unreasonable difference value. We found that a few turnstiles counts backward. Their entry and exit count always decrease instead of increase. To find out those turnstiles, we calculate the ratio of negative differences among all the record of each turnstile. Resets are usually rare in on turnstile. If a turnstile have more than 90% of differences negative, we say it is a negative counter and flip its value to positive. In other cases, negative values are set to 0. We also observed very large values. We set limit on the maximum value of difference (20000) and remove those values.
+
+#### MTA Turnstile Location (turnstile_location_integration.ipynb)
+##### Position Dataset
+Unfortunately, station names in Turnstile Usage Data and that in the Station Position Data on by MTA website seems to have different format, and there seems to be no other foreign key for joining these two datasets. We used a geolocation dataset from a GitHub repository (https://github.com/chriswhong/nycturnstiles/blob/master/geocoded.csv), which contains remote unit, control area, station, lines, division, latitude, and longitude. We join stations and this location data by control area and remote unit.
+
+After joining, most of the C/A-UNIT pairs got its coordinates, while a few didn't, probably because the geolocation data was last updated in 2013. To fixe that, we first see if the same station with a different C/A-UNIT pair has an location assigned, since a station may have multiple control(operator booth) area and remote unit(collections of turnstiles). For example, R248,H007A,1 AVE,L,BMT,40.730901,-73.981719 was in the original dataset, while R248,H007,1 AVE,L,BMT,40.730901,-73.981719 didn't. We confirmed these represent the same station by observing the station names and line names. We added the new entry to the geolocation dataset.
+
+In other cases, the station was not included at all, we manually searched the MTA Station Location file and added those entries. For example, we added R572,N702,96 ST-2 AVE,Q,IND,40.784318,-73.947152, based on the record where line=Second Av, Stop Name=96st, and Daytime Routes=Q. We also searched on wikipedia for newer stations, which is 34 St-Hudson Yard (R072,R550,34 ST-HUDSON YD,7,IRT,40.755839,-74.001961). After adding 25 entries, we have only 10 stations (e.g. 9TH STREET, CITY / BUS, LACKAWANNA, NEWARK BM BW,NEWARK C) left without a location, we will see if we shall drop them or try other approaches.
+
+We plotted the stations we found on map to verify the coordinates.
+
 ## Reference
 
 1. Assessing changes in commuting and individual mobility in major metropolitan areas in the United States during the COVID-19 outbreak. ([link](https://www.networkscienceinstitute.org/publications/assessing-changes-in-commuting-and-individual-mobility-in-major-metropolitan-areas-in-the-united-states-during-the-covid-19-outbreak))
