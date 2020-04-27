@@ -125,14 +125,14 @@ In this part of data cleaning and aggregation, we inspected the Bridges and Tunn
 
 The hourly Bridges and Tunnels dataset consists of 6 attributes (columns), namely    
 
-	- ```Plaza ID```: a numbercoded ID representing each toll plaza
-	- ```Date```: The date associated with the line data 
-	- ```Hour```: The hour (0-23) associated with the line data (0 = between 12am and 1am)
-	- ```Direction```: Direction of Traffic: I = Inbound (IB); O = Outbound (OB)
-	- ```# Vehicles - ETC (E-ZPass)```: The number of vehicles that pass through each bridge or tunnel’s toll plaza using E-ZPass during each hour
-	- ```# Vehicles - Cash/VToll```: The number of vehicles that paid their tolls in cash during that hour
+	- Plaza ID: a numbercoded ID representing each toll plaza
+	- Date: The date associated with the line data 
+	- Hour: The hour (0-23) associated with the line data (0 = between 12am and 1am)
+	- Direction: Direction of Traffic: I = Inbound (IB); O = Outbound (OB)
+	- # Vehicles - ETC (E-ZPass): The number of vehicles that pass through each bridge or tunnel’s toll plaza using E-ZPass during each hour
+	- # Vehicles - Cash/VToll: The number of vehicles that paid their tolls in cash during that hour
 
-with roughly 1.59 million rows (entries) dating all the back to 2010. To make the data more relavant to our cause we only take into account data starting from Jan. 1, 2020, since the first confirmed COVID-19 case in the U.S. was in early 2020, which results in ```44,4445``` data entries. For data cleaning our goal is to identify if there are any    
+with roughly 1.59 million rows (entries) dating all the back to 2010. To make the data more relavant to our cause we only take into account data starting from Jan. 1, 2020, since the first confirmed COVID-19 case in the U.S. was in early 2020, which results in ```44,445``` data entries. For data cleaning our goal is to identify if there are any    
 
 	1. null/invalid values in each row of the six attributes and 
 	2. duplicate values between rows
