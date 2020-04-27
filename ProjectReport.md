@@ -55,7 +55,7 @@ We will use Python and Jupyter Notebook in this project. We will use packages  s
 
 ## Data Cleaning and Integration
 
-### Turnstile Data Preprocessing (MTADataIntegration.ipynb)
+### Turnstile Data Preprocessing
 
 Turnstile data contains 11 fields:
 C/A, UNIT, SCP, STATION, LINENAME, DIVISION, DATE, TIME, DESC, ENTRIES, EXITS
@@ -76,9 +76,9 @@ Only station names and GTFS locations are useful for calculating the location. S
 
 It still requires some processes before the integration of these two data sets because the syntax of station names might be different (e.g. Grand St, grand street). By translating station names to lower cases and conduct the inner join based on Division and Station names, the dataset containing stations with same name in two sets can be figured out.
 
-Next step will be calculating the similarity of station names using edit distance for these stations which cannot make a pair.
+Next step will be calculating the similarity of station names using edit distance for these stations which cannot make a pair. Refer to ```./data_cleaning/turntile/MTADataIntegration.ipynb``` for details.
 
-### MTA Turnstile Usage (turnstile_cleaning.ipynb)
+### MTA Turnstile Usage
 
 ##### Accumulative counters
 
@@ -88,7 +88,9 @@ We compute the daily entries and exits by first computing the change of counter 
 
 There are multiple causes of unreasonable difference value. We found that a few turnstiles counts backward. Their entry and exit count always decrease instead of increase. To find out those turnstiles, we calculate the ratio of negative differences among all the record of each turnstile. Resets are usually rare in on turnstile. If a turnstile have more than 90% of differences negative, we say it is a negative counter and flip its value to positive. In other cases, negative values are set to 0. We also observed very large values. We set limit on the maximum value of difference (20000) and remove those values.
 
-### MTA Turnstile Location (turnstile_location_integration.ipynb)
+Refer to ```./data_cleaning/turnstile_cleaning.ipynb``` for details.
+
+### MTA Turnstile Location
 
 ##### Position Dataset
 Unfortunately, station names in Turnstile Usage Data and that in the Station Position Data on by MTA website seems to have different format, and there seems to be no other foreign key for joining these two datasets. We used a geolocation dataset from a GitHub repository (https://github.com/chriswhong/nycturnstiles/blob/master/geocoded.csv), which contains remote unit, control area, station, lines, division, latitude, and longitude. We join stations and this location data by control area and remote unit.
@@ -97,9 +99,9 @@ After joining, most of the C/A-UNIT pairs got its coordinates, while a few didn'
 
 In other cases, the station was not included at all, we manually searched the MTA Station Location file and added those entries. For example, we added R572,N702,96 ST-2 AVE,Q,IND,40.784318,-73.947152, based on the record where line=Second Av, Stop Name=96st, and Daytime Routes=Q. We also searched on wikipedia for newer stations, which is 34 St-Hudson Yard (R072,R550,34 ST-HUDSON YD,7,IRT,40.755839,-74.001961). After adding 25 entries, we have only 10 stations (e.g. 9TH STREET, CITY / BUS, LACKAWANNA, NEWARK BM BW,NEWARK C) left without a location, we will see if we shall drop them or try other approaches.
 
-We plotted the stations we found on map to verify the coordinates.
+We plotted the stations we found on map to verify the coordinates. Refer to ```./data_cleaning/turnstile_location_integration.ipynb``` for details.
 
-### CitiBike Trip History (citibykes.ipynb)
+### CitiBike Trip History
 
 CitiBike Trip History Data is uploaded each month as a CSV file, data for March 2020 is currently available. Each line of data contains starttime, stop time, start station, end station, and the coordinates of the stations. We are curious about the total number of trips per day and the number of daily trips in terms of departure and arrival stations.
 
@@ -115,7 +117,9 @@ Station locations are joined with trip records. We selected those columns (stati
 
 We plotted the stations on map. We also calculated trips by departure and arrival stations, and show some of the results in the map. One problem with the CitiBike data is that the stations are condensed with in Manhattan and downtowns of Brooklyn and Queens. The subway data may have similar problem, we will need to keep that in mind while doing analysis.
 
-### MTA Bridges and Tunnels Data Preprocessing (MTA_Bridge_and_Tunnel.ipynb)
+Refer to ```./data_cleaning/citibike_cleaing.ipynb``` for details.
+
+### MTA Bridges and Tunnels Data Preprocessing
 
 ##### Description
 
