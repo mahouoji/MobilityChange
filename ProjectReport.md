@@ -34,31 +34,6 @@ Based on the result of the above steps, we might need to delve into more detaile
 
 We will use Python and Jupyter Notebook in this project. We will use packages  such as NumPy, pandas, GeoPandas, Matplotlib, and seaborn.
 
-## Data Cleaning and Integration
-
-### Turnstile Data Preprocessing
-
-Turnstile data contains 11 fields: 
-C/A, UNIT, SCP, STATION, LINENAME, DIVISION, DATE, TIME, DESC, ENTRIES, EXITS
-
-To summarize the ridership of each station for a certain time e.g. one week, four specified fields should be focused: 
-STATION: Represents the station name the device is located at
-DIVISION: Represents the Line originally the station belonged to BMT, IRT, or IND
-ENTRIES: The cumulative entry register value for a device
-EXITS: The cumulative exit register value for a device
-
-Because two stations may have the same name in different transit agencies, (e.g. IND 103 St, IRT 103 St), station and division name should both be used as the primary key to define a specific station. Next, combine the records of ENTRIES and EXITS together and calculate the sum for each station. Thus, the ridership of each station in a period can be calculated.
-
-
-Station data contains 13 fields:
-Station ID, Complex ID, GTFS Stop ID, Division, Line, Stop Name, Borough, Daytime Routes, Structure, GTFS Latitude, GTFS Longitude, North Direction Label, South Direction Label
-
-Only station names and GTFS locations are useful for calculating the location. Some traffic hubs have several entrances for different lines, and their geographical positions are close. Thus, average values of latitude and longitude would be calculated to represent the location of these huge stations.
-
-It still requires some processes before the integration of these two data sets because the syntax of station names might be different (e.g. Grand St, grand street). By translating station names to lower cases and conduct the inner join based on Division and Station names, the dataset containing stations with same name in two sets can be figured out. 
-
-Next step will be calculating the similarity of station names using edit distance for these stations which cannot make a pair.
-
 ## List of Dataset
 
 | Dataset                                                      | Description                                                  |
@@ -76,20 +51,28 @@ Next step will be calculating the similarity of station names using edit distanc
 
 ## Data Cleaning and Integration
 
-#### CitiBike Trip History (citibykes.ipynb)
+#### Turnstile Data Preprocessing (MTADataIntegration.ipynb)
 
-CitiBike Trip History Data is uploaded each month as a CSV file, data for March 2020 is currently available. Each line of data contains starttime, stop time, start station, end station, and the coordinates of the stations. We are curious about the total number of trips per day and the number of daily trips in terms of departure and arrival stations.
-##### Daily tirps
+Turnstile data contains 11 fields:
+C/A, UNIT, SCP, STATION, LINENAME, DIVISION, DATE, TIME, DESC, ENTRIES, EXITS
 
-We used data in February and March. The data was pretty clean. Each trip can be identified by the starttime and a bikeid. We found several trips where starttime and stoptime are in different days, some trips might take many days. But there is not evidence that they are wrong as far as we care. We simply use starttime for aggregation.
+To summarize the ridership of each station for a certain time e.g. one week, four specified fields should be focused:
+STATION: Represents the station name the device is located at
+DIVISION: Represents the Line originally the station belonged to BMT, IRT, or IND
+ENTRIES: The cumulative entry register value for a device
+EXITS: The cumulative exit register value for a device
 
-We plotted the trend of daily trips over the two month. Although the number seems to jitter a lot, probably influenced by weather, there is a clear plunge in late March.
+Because two stations may have the same name in different transit agencies, (e.g. IND 103 St, IRT 103 St), station and division name should both be used as the primary key to define a specific station. Next, combine the records of ENTRIES and EXITS together and calculate the sum for each station. Thus, the ridership of each station in a period can be calculated.
 
-##### Station location and daily trips
 
-Station locations are joined with trip records. We selected those columns (station id, station name, latitude, longitude) and stacked them in one table. We found duplications due to different precisions of latitude and longitude. We kept only the more precise ones by selecting those having larger absolute difference form the rounded value of their own.
+Station data contains 13 fields:
+Station ID, Complex ID, GTFS Stop ID, Division, Line, Stop Name, Borough, Daytime Routes, Structure, GTFS Latitude, GTFS Longitude, North Direction Label, South Direction Label
 
-We plotted the stations on map. We also calculated trips by departure and arrival stations, and show some of the results in the map. One problem with the CitiBike data is that the stations are condensed with in Manhattan and downtowns of Brooklyn and Queens. The subway data may have similar problem, we will need to keep that in mind while doing analysis.
+Only station names and GTFS locations are useful for calculating the location. Some traffic hubs have several entrances for different lines, and their geographical positions are close. Thus, average values of latitude and longitude would be calculated to represent the location of these huge stations.
+
+It still requires some processes before the integration of these two data sets because the syntax of station names might be different (e.g. Grand St, grand street). By translating station names to lower cases and conduct the inner join based on Division and Station names, the dataset containing stations with same name in two sets can be figured out.
+
+Next step will be calculating the similarity of station names using edit distance for these stations which cannot make a pair.
 
 #### MTA Turnstile Usage (turnstile_cleaning.ipynb)
 
@@ -110,6 +93,22 @@ After joining, most of the C/A-UNIT pairs got its coordinates, while a few didn'
 In other cases, the station was not included at all, we manually searched the MTA Station Location file and added those entries. For example, we added R572,N702,96 ST-2 AVE,Q,IND,40.784318,-73.947152, based on the record where line=Second Av, Stop Name=96st, and Daytime Routes=Q. We also searched on wikipedia for newer stations, which is 34 St-Hudson Yard (R072,R550,34 ST-HUDSON YD,7,IRT,40.755839,-74.001961). After adding 25 entries, we have only 10 stations (e.g. 9TH STREET, CITY / BUS, LACKAWANNA, NEWARK BM BW,NEWARK C) left without a location, we will see if we shall drop them or try other approaches.
 
 We plotted the stations we found on map to verify the coordinates.
+
+#### CitiBike Trip History (citibykes.ipynb)
+
+CitiBike Trip History Data is uploaded each month as a CSV file, data for March 2020 is currently available. Each line of data contains starttime, stop time, start station, end station, and the coordinates of the stations. We are curious about the total number of trips per day and the number of daily trips in terms of departure and arrival stations.
+
+##### Daily tirps
+
+We used data in February and March. The data was pretty clean. Each trip can be identified by the starttime and a bikeid. We found several trips where starttime and stoptime are in different days, some trips might take many days. But there is not evidence that they are wrong as far as we care. We simply use starttime for aggregation.
+
+We plotted the trend of daily trips over the two month. Although the number seems to jitter a lot, probably influenced by weather, there is a clear plunge in late March.
+
+##### Station location and daily trips
+
+Station locations are joined with trip records. We selected those columns (station id, station name, latitude, longitude) and stacked them in one table. We found duplications due to different precisions of latitude and longitude. We kept only the more precise ones by selecting those having larger absolute difference form the rounded value of their own.
+
+We plotted the stations on map. We also calculated trips by departure and arrival stations, and show some of the results in the map. One problem with the CitiBike data is that the stations are condensed with in Manhattan and downtowns of Brooklyn and Queens. The subway data may have similar problem, we will need to keep that in mind while doing analysis.
 
 ## Reference
 
