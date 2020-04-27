@@ -59,6 +59,38 @@ It still requires some processes before the integration of these two data sets b
 
 Next step will be calculating the similarity of station names using edit distance for these stations which cannot make a pair.
 
+###  MTA Bridges and Tunnels Data Preprocessing
+
++ Description
+
+In this part of data cleaning and aggregation, we inspected the Bridges and Tunnels Traffic Data provided by the Metropolitan Traffic Authority (MTA). The data consists of the number of vehicles (including cars, buses, trucks and motorcycles) that pass through each of the bridges and tunnels operated by the MTA. The goal is to see how COVID-19 has impacted the traffic flow through those bridges and tunnels in the Metropolitan area and if there is any interesting underlying insights. The MTA provides both daily and hourly traffic data both of which are updated weekly. But the daily data stops being updated at Aug. 27, 2018, whereas the hourly data is up to date, so that is what we chose to use. Where the data is hosted and means of access is listed in the section _Access of Data_ below.
+
++ Cleaning Pipelines
+
+The hourly Bridges and Tunnels dataset consists of 6 attributes (columns), namely
+	+ ```Plaza ID''': a numbercoded ID representing each toll plaza
+	+ ```Date''': The date associated with the line data 
+	+ ```Hour''': The hour (0-23) associated with the line data (0 = between 12am and 1am)
+	+ ```Direction''': Direction of Traffic: I = Inbound (IB); O = Outbound (OB)
+	+ ```# Vehicles - ETC (E-ZPass)''': The number of vehicles that pass through each bridge or tunnel’s toll plaza using E-ZPass during each hour
+	+ ```# Vehicles - Cash/VToll''': The number of vehicles that paid their tolls in cash during that hour
+with roughly 1.59 million rows (entries) dating all the back to 2010. To make the data more relavant to our cause we only take into account data starting from Jan. 1, 2020, since the first confirmed COVID-19 case in the U.S. was in early 2020, which results in ```44,4445''' data entries. For data cleaning our goal is to identify if there are any
+	1. null/invalid values in each row of the six attributes and 
+	2. duplicate values between rows
+and surprsingly enough, by inspection the hourly traffic is well curated and none of the above problems exists, which saves us a lot of headache. Now that we know we do not need to worry about data error, we can safely move on to data aggregation to compute statistics of interest to give us an idea of how COVID-19 has impacted the traffic flow through the bridges and tunnels.
+
++ Data Aggregation
+
+Here natually three questions arise that are of interest, 
+	1. How has the ETC or Cash/Toll changed from January to April because of COVID-19?
+	2. Did traffic patterns in each hours change per month because of COVID-19?
+	3. How has COVID-19 impacted traffic flow in different geographic regions (i.e. plazas)?
+Refer to ```./data_cleaning/MTA_Bridges_and_Tunnel.ipynb''' for detailed quantitative analysis and visualization.
+
++ Access of Data
+
+The hourly MTA Bridges and Tunnels data is hosted at [Hourly Traffic on MTA Bridges and Tunnels](https://data.ny.gov/Transportation/Hourly-Traffic-on-Metropolitan-Transportation-Auth/qzve-kjga) and is free of charge to access.
+
 ## List of Dataset
 
 | Dataset                                                      | Description                                                  |
