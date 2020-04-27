@@ -34,6 +34,31 @@ Based on the result of the above steps, we might need to delve into more detaile
 
 We will use Python and Jupyter Notebook in this project. We will use packages  such as NumPy, pandas, GeoPandas, Matplotlib, and seaborn.
 
+## Data Cleaning and Integration
+
+### Turnstile Data Preprocessing
+
+Turnstile data contains 11 fields: 
+C/A, UNIT, SCP, STATION, LINENAME, DIVISION, DATE, TIME, DESC, ENTRIES, EXITS
+
+To summarize the ridership of each station for a certain time e.g. one week, four specified fields should be focused: 
+STATION: Represents the station name the device is located at
+DIVISION: Represents the Line originally the station belonged to BMT, IRT, or IND
+ENTRIES: The cumulative entry register value for a device
+EXITS: The cumulative exit register value for a device
+
+Because two stations may have the same name in different transit agencies, (e.g. IND 103 St, IRT 103 St), station and division name should both be used as the primary key to define a specific station. Next, combine the records of ENTRIES and EXITS together and calculate the sum for each station. Thus, the ridership of each station in a period can be calculated.
+
+
+Station data contains 13 fields:
+Station ID, Complex ID, GTFS Stop ID, Division, Line, Stop Name, Borough, Daytime Routes, Structure, GTFS Latitude, GTFS Longitude, North Direction Label, South Direction Label
+
+Only station names and GTFS locations are useful for calculating the location. Some traffic hubs have several entrances for different lines, and their geographical positions are close. Thus, average values of latitude and longitude would be calculated to represent the location of these huge stations.
+
+It still requires some processes before the integration of these two data sets because the syntax of station names might be different (e.g. Grand St, grand street). By translating station names to lower cases and conduct the inner join based on Division and Station names, the dataset containing stations with same name in two sets can be figured out. 
+
+Next step will be calculating the similarity of station names using edit distance for these stations which cannot make a pair.
+
 ## List of Dataset
 
 | Dataset                                                      | Description                                                  |
