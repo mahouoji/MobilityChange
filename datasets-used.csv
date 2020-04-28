@@ -1,0 +1,5 @@
+Dataset Name	Dataset source/creator	Link to Dataset	Country	State	Temporal Resolution	Temporal range - Start	Temporal range - End	Spatial resolution	Description	Keywords
+MTA NYC Transit Turnstile Usage Data	mta.info	http://web.mta.info/developers/turnstile.html	United States of America	New York	day	3.1	4.18		"Weekly released cumulative entrance and exit count of each turnstile for each stations. For each week, there is a CSV formatted text file, with header:
+C/A, UNIT, SCP, STATION, LINENAME, DIVISION, DATE, TIME, DESC, ENTRIES, EXITS"	"MTA, Turnstile, Ridership"
+MTA NYC Transit Station Locations	mta.info	http://web.mta.info/developers/data/nyct/subway/Stations.csv	United States of America	New York				city	Latitude and longitude of subway stations	"Location, Station"
+NYC Neighborhood Tabulation Areas	nyc.gov	https://www1.nyc.gov/site/planning/data-maps/open-data/dwn-nynta.page	United States of America	New York				city	Projections of the approximations of New York City's Community Districts	"Location, States"
