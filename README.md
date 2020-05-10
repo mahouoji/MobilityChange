@@ -1,4 +1,4 @@
-# BigData2020 Project
+# BigData2020 Mobility Change Project
 
 ## Group Name
 
@@ -16,10 +16,29 @@ Yunxiao Shi (ys3404)
 
 ### Python
 
+#### Environment
+
+```
+jupyterlab==2.1.1
+numpy==1.18.1
+pandas==1.0.3
+matplotlib==3.1.3
+seaborn==0.10.0
+folium==0.10.1
+lxml==4.5.0
+uszipcode==0.2.4
+```
+
+Using pip:
+
+```bash
+pip3 install -r requirements.txt # we suggest using python 3.6 or 3.7
+```
+
 Using [Conda](https://www.anaconda.com/):
 
 ```bash
-conda create --name bigdta-py36 python=3.6 
+conda create --name bigdta-py36 python=3.6 # use python 3.6
 conda activate bigdta-py36
 conda install -c conda-forge jupyterlab
 conda install -c anaconda numpy
@@ -27,11 +46,13 @@ conda install -c anaconda pandas
 conda install -c conda-forge matplotlib
 conda install -c anaconda seaborn
 conda install -c conda-forge folium
+conda install -c anaconda lxml
+pip install uszipcode
 ```
 
 ### PySpark
 
-...
+on NYU@HPC DUMBO cluster
 
 ## Contributing
 
@@ -49,4 +70,3 @@ git push origin your_branch_name
 ```
 
 2. Using this branch, open a pull request on Github
-
