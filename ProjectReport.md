@@ -181,20 +181,26 @@ We compute the change percentage of each station, by dividing the daily entries 
 
 <img src="./doc/top_station_change_percentage.png" style="zoom:33%;" />
 
-##### 3. Ridership change by timeslot
+##### 3. Ridership change by time-slot, the flow of commuters
 
-TBD...
+We split data into time-slots by rounding the turnstile reading time to 4 hour intervals, at 0, 4, 8, 12, 16, 20 o'clock. This is an approximate approaches because turnstile readings are staggered. We take intervals before 12:00p.m. as morning, and after 12:00p.m. as evening, and see how entrance and exits differ in different time of day.
+
+In regular days, Manhattan stations are more active in morning and evening both by entries and exits. Workday riderships by morning exits and evening entries in large stations are much higher, indicating that people are accumulating to these stations. After the outbreak, in April, those stations remain the biggest target for commuters as they still rank highest in terms of morning exits and evening entries. Morning entries and evening exits in Manhattan stations dropped the most, probably because residents there were able to stay at home or to choose other transportations. 
+
+<img src="./doc/turnstile_morning_evening.png" alt="turnstile_morning_evening" style="zoom:33%;" />
+
+<img src="./doc/turnstile_morning_evening_large.png" alt="turnstile_morning_evening_large" style="zoom:33%;" />
 
 ##### 5. Ridership overview by spatial distribution
 
-In this session, we attempt to analyze the data aggregated over zip codes. we will visualize the distribution of MTA ridership based on turnstile before and during the epidemic, then try to discuss the possible explanations for the results, We aggregate the ridership and combine them with the geographical location for each station, then the ridership of these station-associated geographic points can be calculated. 	
+In this session, we attempt to analyze the data aggregated over zip codes. We will visualize the distribution of MTA ridership based on turnstile before and during the epidemic, then try to discuss the possible explanations for the results, We aggregate the ridership and combine them with the geographical location for each station, then the ridership of these station-associated geographic points can be calculated.
 
 Next step is aggregating these geographic points to the spatial polygons of NYC regions divided by zip codes. To reduce the running time, quad tree is applied as the index structure for spatial aggregation. 
 
 There is a tendency from the analysis of ridership change over time that ridership in weekends and holidays is much lower than that in workdays, even after the number has dropped. Thus, to visualize the spatial distribution, we selected 3 typical workdays in 2020 Feb-April: 02/19. 03/18, 04/22.
 
 <img src="./doc/ridership_0219.png" style="zoom:33%;" width="285"/> <img src="./doc/ridership_0318.png" style="zoom:33%;" width="285"/> <img src="./doc/ridership_0422.png" style="zoom:33%;" width="285"/>
- 
+
        02 / 19 Ridership                       03 / 18 Ridership                       04 / 22 Ridership
 
 Based on the visualization of ridership distribution, several similarities of these three images can be directly found. Compared with the NYC transit map, the geographical layout of lines and density of stations to some extent determines the distribution of ridership. Regions in Manhattan, especially between 30St and 50St have the largest ridership because midtown Manhattan has the highest population density and turnover. Some transportation hubs mentioned above like Time Square – 42 St and 34 St – Penn Sq just locate here. The strong energy of Manhattan to some extent influences regions nearby. Regions or neighborhoods in Brooklyn and Queens which directly connected to Manhattan with bridges or tunnels have larger ridership nearby. Some regions even have larger ridership than most regions in Manhattan. 
