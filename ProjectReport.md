@@ -167,6 +167,8 @@ The hourly MTA Bridges and Tunnels data is hosted at [Hourly Traffic on MTA Brid
 
 We crawled MTA turnstile data web page for links to all the turnstile data. We selected data based on their time rage. For this project, we focused on data form 01/01/2020 to 05/08/2020 which is by now the latest data. We also used data of 2019 from January to May for comparison.
 
+See implementation details in  ```./turnstile_flow_analysis``` for part 1-3 and ```./turnstile_neighborhood_analysis``` for part 4-5.
+
 ##### 1. Overall ridership change over time
 
 We aggregated turnstile entries and exits count in all stations for the overall mobility change. Numbers in 2020 was similar to previous year's before March when it started to drop. Ridership in weekends and holidays is much lower than that in workdays, even after the number has dropped, indicating that people are still commuting. We selected workdays and computed the average workday entries and exits in 2019 Jan-May, 2020 Jan-Feb15, and 2020 April.
