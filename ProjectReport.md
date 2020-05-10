@@ -234,7 +234,7 @@ Apart from the above detailed analysis we did using turnstile and bridge-tunnel 
 
 Here the sentiment of person's tweets is computed by a Naive Bayes classifier trained on the [Stanford NLTK corpus](http://www.nltk.org/). Others are aggregated statistics in count. Note that they are computed real time on the fly which are subject to change.
 
-<img src="./subway_tweets/snapshots/snapshot-1059@510.png" alt="kibana-visualization" style="zoom: 50%;" />
+<img src="./subway_tweets_analysis/snapshots/snapshot-1059@510.png" style="zoom:50%;" />
 
 We can see that positive and neutral tweets takes up the majority of people's tweets, with only 13.68% being negative tweets. #Aline, #Fline, #Bline, etc are frequently present in people's tweets and incident report tweets usually standout. These visualizations provide us with a window into how people feels about the current subway / public transportation system. Please refer to ```subway_tweets_analysis/``` for details and usage.
 
