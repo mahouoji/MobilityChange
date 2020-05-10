@@ -220,6 +220,23 @@ A simple linear regression model is conducted to display the relationship betwee
 In the third row of the correlation matrix we can see the relationship between ridership with positive rate, income, population and positive cases per thousand people. Number of positive cases per thousand. The results generally indicate that ridership loading positively on population, negatively on positive rate, income and positive cases per thousand people. It is obviously that the ridership loads positively on population. As total population in regions goes up, the ridership rises. 
 An interesting observation is that, besides regional population, regional ridership tends to be influenced by income (-0.091) and positive rate (-0.085) in a very low magnitude, meaning the regional income or the positive rate are not the key factor influencing the distribution of ridership. So, one of our future tasks might be figuring out factors, besides population, cases the transformation of distribution of ridership.
 
+#### Subway Tweets Analysis
+
+Apart from the above detailed analysis we did using turnstile and bridge-tunnel data, we tried to consider the aspect of how people felt about the impact of Covid-19 on public transportation. Naturally a nice way to see into this would be to get an idea of what people are posting on Twitter about this, and that's we did. We pull down 6,866 tweets in the last 24 hours in the NYC region (geo-location filtering) and under the keywords of ```subway, covid, ridership, NYC, MTA```. The choice of last 24 hours is mainly due to the restrictions of Twitter API and constraint of time and resource. With this data we investigated:
+
++ What are people's emotions in these tweets? (sentiment analysis) 
+
++ What are the popular hashtags in these tweets? (hashtag cloud)
+
++ Are there any tweets that attract unusual attention? (tweets with lots of retweets)
+
++ How does people's emotions vary temporally?
+
+Here the sentiment of person's tweets is computed by a Naive Bayes classifier trained on the [Stanford NLTK corpus](http://www.nltk.org/). Others are aggregated statistics in count. Note that they are computed real time on the fly which are subject to change.
+
+<img src="./subway_tweets_analysis/snapshots/snapshot-1059@510.png" style="zoom:50%;" />
+
+We can see that positive and neutral tweets takes up the majority of people's tweets, with only 13.68% being negative tweets. #Aline, #Fline, #Bline, etc are frequently present in people's tweets and incident report tweets usually standout. These visualizations provide us with a window into how people feels about the current subway / public transportation system. Please refer to ```subway_tweets_analysis/``` for details and usage.
 
 ## Reference
 
