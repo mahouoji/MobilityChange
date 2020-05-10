@@ -185,6 +185,36 @@ We compute the change percentage of each station, by dividing the daily entries 
 
 TBD...
 
+##### 5. Ridership overview by spatial distribution
+
+In this session, we attempt to analyze the data aggregated over zip codes. we will visualize the distribution of MTA ridership based on turnstile before and during the epidemic, then try to discuss the possible explanations for the results, We aggregate the ridership and combine them with the geographical location for each station, then the ridership of these station-associated geographic points can be calculated. 	
+
+Next step is aggregating these geographic points to the spatial polygons of NYC regions divided by zip codes. To reduce the running time, quad tree is applied as the index structure for spatial aggregation. 
+
+There is a tendency from the analysis of ridership change over time that ridership in weekends and holidays is much lower than that in workdays, even after the number has dropped. Thus, to visualize the spatial distribution, we selected 3 typical workdays in 2020 Feb-April: 02/19. 03/18, 04/22.
+
+<img src="./doc/ridership_0219.png" style="zoom:33%;" width="285"/> <img src="./doc/ridership_0318.png" style="zoom:33%;" width="285"/> <img src="./doc/ridership_0422.png" style="zoom:33%;" width="285"/>
+ 
+       02 / 19 Ridership                       03 / 18 Ridership                       04 / 22 Ridership
+
+Based on the visualization of ridership distribution, several similarities of these three images can be directly found. Compared with the NYC transit map, the geographical layout of lines and density of stations to some extent determines the distribution of ridership. Regions in Manhattan, especially between 30St and 50St have the largest ridership because midtown Manhattan has the highest population density and turnover. Some transportation hubs mentioned above like Time Square – 42 St and 34 St – Penn Sq just locate here. The strong energy of Manhattan to some extent influences regions nearby. Regions or neighborhoods in Brooklyn and Queens which directly connected to Manhattan with bridges or tunnels have larger ridership nearby. Some regions even have larger ridership than most regions in Manhattan. 
+
+Some tendencies can be explored with the comparison of these three images. All the regions have the great drop of ridership. The max value of ridership decreases from 363553 to 18214. The color of some inland regions in Queens and Brooklyn turn from light yellow to light red, meaning these places are taking larger share of ridership than before the disease. Based on the analysis above, stations in Manhattan have ridership dropped the most. So, the distribution of ridership is easier to distinguish as threshold value decreases a lot.
+
+##### 6. Brief analysis of influencing factors
+
+Some factors might influence the ridership change. Economic indicators in different regions may be a suitable introduction.
+
+<img src="./doc/income_positive.png" style="zoom:33%;" width="450"/>
+
+A simple linear regression model is conducted to display the relationship between positive cases per thousand and regional incomes. An observation is that the increase in regional income is accompanied by the huge decreases in positive rate and positive per thousand people. In the next step, we want to simply examine the effect of regional income on ridership. 
+
+<img src="./doc/correlation.png" style="zoom:33%;" width="450"/>
+
+In the third row of the correlation matrix we can see the relationship between ridership with positive rate, income, population and positive cases per thousand people. Number of positive cases per thousand. The results generally indicate that ridership loading positively on population, negatively on positive rate, income and positive cases per thousand people. It is obviously that the ridership loads positively on population. As total population in regions goes up, the ridership rises. 
+An interesting observation is that, besides regional population, regional ridership tends to be influenced by income (-0.091) and positive rate (-0.085) in a very low magnitude, meaning the regional income or the positive rate are not the key factor influencing the distribution of ridership. So, one of our future tasks might be figuring out factors, besides population, cases the transformation of distribution of ridership.
+
+
 ## Reference
 
 1. Assessing changes in commuting and individual mobility in major metropolitan areas in the United States during the COVID-19 outbreak. ([link](https://www.networkscienceinstitute.org/publications/assessing-changes-in-commuting-and-individual-mobility-in-major-metropolitan-areas-in-the-united-states-during-the-covid-19-outbreak))
