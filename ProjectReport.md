@@ -2,7 +2,11 @@
 
 ### Project Link
 
-https://github.com/mahouoji/MobilityChange
+GitHub: https://github.com/mahouoji/MobilityChange
+
+Presentation slide (visible to NYU accounts): [link](https://docs.google.com/presentation/d/1piaNrNl817GZQzPg_8UStvXQNDt3SCcbgHHZBl4PneI/edit?usp=sharing)
+
+Updated project report (me): [link](https://github.com/mahouoji/MobilityChange/blob/master/ProjectReport.md)
 
 ## Group Name
 
@@ -191,7 +195,7 @@ In regular days, Manhattan stations are more active in morning and evening both 
 
 <img src="./doc/turnstile_morning_evening_large.png" alt="turnstile_morning_evening_large" style="zoom:33%;" />
 
-##### 5. Ridership overview by spatial distribution
+##### 4. Ridership overview by spatial distribution
 
 In this session, we attempt to analyze the data aggregated over zip codes. We will visualize the distribution of MTA ridership based on turnstile before and during the epidemic, then try to discuss the possible explanations for the results, We aggregate the ridership and combine them with the geographical location for each station, then the ridership of these station-associated geographic points can be calculated.
 
@@ -207,7 +211,7 @@ Based on the visualization of ridership distribution, several similarities of th
 
 Some tendencies can be explored with the comparison of these three images. All the regions have the great drop of ridership. The max value of ridership decreases from 363553 to 18214. The color of some inland regions in Queens and Brooklyn turn from light yellow to light red, meaning these places are taking larger share of ridership than before the disease. Based on the analysis above, stations in Manhattan have ridership dropped the most. So, the distribution of ridership is easier to distinguish as threshold value decreases a lot.
 
-##### 6. Brief analysis of influencing factors
+##### 5. Brief analysis of influencing factors
 
 Some factors might influence the ridership change. Economic indicators in different regions may be a suitable introduction.
 
