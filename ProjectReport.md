@@ -86,14 +86,14 @@ The turnstile entry and exit count are accumulative, they continues to increase 
 
 We compute the daily entries and exits by first computing the change of counter between each adjacent reading. The change (or difference) is calculated by subtracting the value of this time slot from the value of next time slot. We fix unreasonable values for each time slots. After that we group data by turnstile and date and sum the differences.
 
-There are multiple causes of unreasonable difference value. We found that a few turnstiles counts backward. Their entry and exit count always decrease instead of increase. To find out those turnstiles, we calculate the ratio of negative differences among all the record of each turnstile. Resets are usually rare in on turnstile. If a turnstile have more than 90% of differences negative, we say it is a negative counter and flip its value to positive. In other cases, negative values are set to 0. We also observed very large values. We set limit on the maximum value of difference (20000) and remove those values.
+There are multiple causes of unreasonable difference value. We found that a few turnstiles counts backward. Their entry and exit count always decrease instead of increase. To find out those turnstiles, we calculate the ratio of negative differences among all the record of each turnstile. Resets are usually rare in on turnstile. If a turnstile have more than 90% of differences negative, we say it is a negative counter and flip its value to positive. In other cases, negative values are set to 0. We also observed very large values. We set limit on the maximum value of difference (15000) and remove those values.
 
 Refer to ```./data_cleaning/turnstile_cleaning.ipynb``` for details.
 
 ### MTA Turnstile Location
 
 ##### Position Dataset
-Unfortunately, station names in Turnstile Usage Data and that in the Station Position Data on by MTA website seems to have different format, and there seems to be no other foreign key for joining these two datasets. We used a geolocation dataset from a GitHub repository (https://github.com/chriswhong/nycturnstiles/blob/master/geocoded.csv), which contains remote unit, control area, station, lines, division, latitude, and longitude. We join stations and this location data by control area and remote unit.
+Station names in Turnstile Usage Data and that in the Station Position Data on by MTA website seems to have different format, and there seems to be no other foreign key for joining these two datasets. We used a geolocation dataset from a GitHub repository (https://github.com/chriswhong/nycturnstiles/blob/master/geocoded.csv), which contains remote unit, control area, station, lines, division, latitude, and longitude. We join stations and this location data by control area and remote unit.
 
 After joining, most of the C/A-UNIT pairs got its coordinates, yet a few didn't, probably because the geolocation data was last updated in 2013. To fixe that, we first see if the same station with a different C/A-UNIT pair has an location assigned, since a station may have multiple control(operator booth) area and remote unit(collections of turnstiles). For example, R248,H007A,1 AVE,L,BMT,40.730901,-73.981719 was in the original dataset, while R248,H007,1 AVE,L,BMT,40.730901,-73.981719 didn't. We confirmed these represent the same station by observing the station names and line names. We added the new entry to the geolocation dataset.
 
@@ -156,6 +156,34 @@ Refer to ```./data_cleaning/MTA_Bridges_and_Tunnel.ipynb``` for detailed quantit
 ##### Access of Data
 
 The hourly MTA Bridges and Tunnels data is hosted at [Hourly Traffic on MTA Bridges and Tunnels](https://data.ny.gov/Transportation/Hourly-Traffic-on-Metropolitan-Transportation-Auth/qzve-kjga) and is free of charge to access.
+
+## Data Analysis and Findings
+
+#### Analyzing turnstile data trend
+
+We crawled MTA turnstile data web page for links to all the turnstile data. We selected data based on their time rage. For this project, we focused on data form 01/01/2020 to 05/08/2020 which is by now the latest data. We also used data of 2019 from January to May for comparison.
+
+##### 1. Overall ridership change over time
+
+We aggregated turnstile entries and exits count in all stations for the overall mobility change. Numbers in 2020 was similar to previous year's before March when it started to drop. Ridership in weekends and holidays is much lower than that in workdays, even after the number has dropped, indicating that people are still commuting. We selected workdays and computed the average workday entries and exits in 2019 Jan-May, 2020 Jan-Feb15, and 2020 April.
+
+We found the trend agree with the findings in [1], in which mobility in NYC begin to decrease by emergency declaration and has almost reached bottom when stay-at-home order issued. Yet subway mobility are more affected. In April the entries has dropped to 8.35% of regular amount, and exits dropped to 11.8%. Notice that entries are always a few larger than exits especially in regular days, probably because people may not use turnstiles when exiting, therefore, entrance may better reflect the actual ridership.
+
+<img src="./doc/turnstile_total_trend.png" alt="turnstile_total_trend" style="zoom: 50%;" />
+
+##### 2. Ridership change by station and location
+
+We aggregate daily entries and exits by stations defined by station name and lines. We choose top 10 active stations in regular days (Jan-Feb15) and top 10 active stations in April based on the average daily ridership in that time span. Some stations get into top10 in April, which are JKSN HT-ROOSVLT(7EFMR), FLUSING_MAIN(7), JAMAICA CENTER(EJZ) in Queens, CROWN HTS-UTICA(34) in Brooklyn, and 125 ST(456) in Manhattan.
+
+We compute the change percentage of each station, by dividing the daily entries and exits with the average value of that station in regular days (work days in Jan-Feb25). Looking from the change percentage, stations in Manhattan have ridership dropped the most. Yet we must also consider that the original number in manhattan was way larger than other boroughs, and 6 out of 10 top active stations in April are in Manhattan, including the most busiest one 14 ST-UNION SQ(456LNQRW), and 125 ST(456) which showed similar percentage of change as those Brooklyn and Queens stations.
+
+<img src="./doc/top_station_change.png" alt="top_station_change" style="zoom: 33%;" />
+
+<img src="./doc/top_station_change_percentage.png" style="zoom:33%;" />
+
+##### 3. Ridership change by timeslot
+
+TBD...
 
 ## Reference
 
