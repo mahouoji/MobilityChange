@@ -95,6 +95,12 @@ on NYU@HPC DUMBO cluster
 - ```./citibike```
 - ```./mta_bridge_and_tunnel```
 
+### Dependencies
+
+Turnstile flow analysis pipeline
+
+<img src="/Users/hang/Desktop/BigData/project/doc/dependency.png" alt="dependency" style="zoom: 33%;" />
+
 ## Contributing
 
 1. Make a branch from `master` and add your changes:
