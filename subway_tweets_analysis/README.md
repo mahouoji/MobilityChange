@@ -16,7 +16,7 @@ Due to the constraint of time and resources, also the restrictions of Twitter AP
 
 ## Usage and Requirements
 
-1. Set up and obtain Twitter user access tokens following [this guide](https://developer.twitter.com/en/docs/basics/authentication/oauth-1-0a/obtaining-user-access-token). Put them in ```config.py```.
+1. Set up and obtain Twitter user access tokens following [this guide](https://developer.twitter.com/en/docs/basics/authentication/oauth-1-0a/obtaining-user-access-tokens). Put them in ```config.py```.
 
 2. Install and set up [Elasticsearch](https://www.elastic.co/) and [Kibana](https://www.elastic.co/kibana) following [this guide](https://www.digitalocean.com/community/tutorials/how-to-install-elasticsearch-logstash-and-kibana-elastic-stack-on-ubuntu-18-04).
 
