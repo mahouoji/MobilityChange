@@ -22,14 +22,14 @@ Yunxiao Shi (ys3404)
 
 ## Project Description
 
-In respond to the pandemic, mobility in cities changed drastically under administrative restriction and voluntary behavior change. Resent studies [1, 3] quantified state-level or country-level mobility change using mobility statistics. Within New York City, traffic volume and public transportation usage has dropped, while different neighborhoods may respond differently [2].
+In response to the pandemic, mobility in cities changed drastically under administrative restriction and voluntary behavior change. Recent studies [1, 3] quantified state-level or country-level mobility change using mobility statistics. Within New York City, traffic volume and public transportation usage has dropped, while different neighborhoods may respond differently [2].
 
 In this project we will use MTA turnstile data, along with other datasets, to analyze the mobility change in terms of subway ridership in different areas of NYC.
 
 ### Problems
 
 - How does mobility change over time? How does stat-at-home policies affect the trends?
-- Dose mobility change show different patterns in different areas?
+- Does mobility change show different patterns in different areas?
 - How does subway ridership correlate to other matrices such as confirmed cases?
 
 ### Approaches
@@ -179,9 +179,9 @@ We found the trend agree with the findings in [1], in which mobility in NYC begi
 
 ##### 2. Ridership change by station and location
 
-We aggregate daily entries and exits by stations defined by station name and lines. We choose top 10 active stations in regular days (Jan-Feb15) and top 10 active stations in April based on the average daily ridership in that time span. Some stations get into top10 in April, which are JKSN HT-ROOSVLT(7EFMR), FLUSING_MAIN(7), JAMAICA CENTER(EJZ) in Queens, CROWN HTS-UTICA(34) in Brooklyn, and 125 ST(456) in Manhattan.
+We aggregate daily entries and exits by stations defined by station name and lines. We choose top 10 active stations in regular days (Jan-Feb15) and top 10 active stations in April based on the average daily ridership in that time span. Some stations got into top10 in April, which are JKSN HT-ROOSVLT(7EFMR), FLUSING_MAIN(7), JAMAICA CENTER(EJZ) in Queens, CROWN HTS-UTICA(34) in Brooklyn, and 125 ST(456) in Manhattan.
 
-We compute the change percentage of each station, by dividing the daily entries and exits with the average value of that station in regular days (work days in Jan-Feb25). Looking from the change percentage, stations in Manhattan have ridership dropped the most. Yet we must also consider that the original number in manhattan was way larger than other boroughs, and 6 out of 10 top active stations in April are in Manhattan, including the most busiest one 14 ST-UNION SQ(456LNQRW), and 125 ST(456) which showed similar percentage of change as those Brooklyn and Queens stations.
+We compute the change percentage of each station, by dividing the daily entries and exits with the average value of that station in regular days (work days in Jan-Feb25). Looking from the change percentage, stations in Manhattan have ridership dropped the most. Yet we must also consider that the original number in manhattan was way larger than other boroughs, and 6 out of 10 top active stations in April are in Manhattan, including the most busiest one 14 ST-UNION SQ(456LNQRW), and 125 ST(456) which showed similar percentage of change (about 30%) as those Brooklyn and Queens stations.
 
 <img src="./doc/top_station_change.png" alt="top_station_change" style="zoom: 33%;" />
 
@@ -191,7 +191,7 @@ We compute the change percentage of each station, by dividing the daily entries 
 
 We split data into time-slots by rounding the turnstile reading time to 4 hour intervals, at 0, 4, 8, 12, 16, 20 o'clock. This is an approximate approaches because turnstile readings are staggered. We take intervals before 12:00p.m. as morning, and after 12:00p.m. as evening, and see how entrance and exits differ in different time of day.
 
-In regular days, Manhattan stations are more active in morning and evening both by entries and exits. Workday riderships by morning exits and evening entries in large stations are much higher, indicating that people are accumulating to these stations. After the outbreak, in April, those stations remain the biggest target for commuters as they still rank highest in terms of morning exits and evening entries. Morning entries and evening exits in Manhattan stations dropped the most, probably because residents there were able to stay at home or to choose other transportations. 
+In regular days, Manhattan stations are more active in morning and evening both by entries and exits. Workday riderships by morning exits and evening entries in large stations are much higher, indicating that people are accumulating to these stations. After the outbreak, in April, those stations remain the biggest target for commuters as they still rank highest in terms of morning exits and evening entries. Morning entries and evening exits in Manhattan stations dropped the most, probably because residents there were able to stay at home or to choose other transportations.
 
 <img src="./doc/turnstile_morning_evening.png" alt="turnstile_morning_evening" style="zoom:33%;" />
 
