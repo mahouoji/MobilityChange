@@ -24,7 +24,7 @@ Due to the constraint of time and resources, also the restrictions of Twitter AP
 
 4. Do ```python sentiment.py``` to start pulling down the tweets. You can specify your own filtering criteria in line #93-94 in ```sentiment.py``` where we set geolocations and keywords filtering. Of course alternatively you can use ```argparse``` to pass in those arguments by CLI.
 
-5. Refer to (Kibana user guide)[https://www.elastic.co/guide/en/kibana/7.6/index.html] to customize your own visualizations.
+5. Refer to [Kibana user guide](https://www.elastic.co/guide/en/kibana/7.6/index.html) to customize your own visualizations.
 
 ## Summarized Conclusions (Things we looked at)
 

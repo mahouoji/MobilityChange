@@ -75,6 +75,12 @@ on NYU@HPC DUMBO cluster
 
 ```./subway_tweets_analysis```
 
+- ```config.py``` place to put your Twitter access keys and tokens
+- ```sentiment.py``` script to pull down tweets with geolocations and keywords filtering. Also logs them into Elasticsearch
+- ```README.md``` instructions on how to use and summarized conclusions
+- ```snapshots/``` folder that contains example Kibana visualizations
+- ```requirements.txt``` list of denpendencies that you need to have to get this up and running
+
 
 
 ```./data```
