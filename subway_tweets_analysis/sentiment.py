@@ -89,8 +89,9 @@ if __name__ == '__main__':
         try:
             # create instance of tweepy stream
             stream = Stream(auth, listener)
-            # search twitter for keywords
+            # geolocation filtering restrict to tweets from NYC region
             stream.filter(languages=['en'], locations=[-74.1687,40.5722,-73.8062,40.9467])
+            # keywords filtering for selected topics
             stream.filter(track=['subway','ridership','NYC','covid','MTA'])
         except IncompleteRead:
             continue
